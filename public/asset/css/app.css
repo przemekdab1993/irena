@@ -1,0 +1,345 @@
+.container-main {
+}
+
+.example-wrapper {
+    padding: 25px;
+}
+.example-wrapper.example-wrapper-top {
+    background: #fffb70;
+    padding: 50px 25px;
+}
+.example-wrapper.example-wrapper-left {
+    background: #2ee4a7;
+}
+.example-wrapper.example-wrapper-right {
+    background: #95eace;
+}
+
+
+.box-content {
+    background-color: #cc7a13;
+    border-top: 1px solid #965809;
+    border-bottom: 1px solid #965809;
+;padding: 15px;
+    text-align: center;
+}
+body {
+    margin: 0;
+    padding: 0px;
+    background-color: #8a8a8a;
+    color: #ddd;
+}
+.box-content-2 {
+    max-width: 1190px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px 25px 10px 25px;
+    background-color: #6c6b6b;
+}
+.blog-doc-content .blog-title {
+
+}
+.blog-doc-content .blog-content {
+
+}
+.blog-doc-content .blog-bar {
+    margin-top: 25px;
+}
+.blog-doc-content .blog-bar .blog-bar-date {
+    display: block;
+    margin-bottom: 20px;
+
+}
+.blog-doc-content .blog-bar .blog-bar-tags {
+    display: block;
+    margin-bottom: 20px;
+}
+.blog-doc-content .blog-bar .blog-bar-tags span {
+    color: #fff;
+    padding: 6px 12px;
+    background-color: #8a8a8a;
+    border-radius: 20px;
+    margin-right: 4px;
+}
+.blog-doc-content .blog-bar .blog-bar-author {
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #8a8a8a;
+    border-radius: 8px;
+}
+.blog-doc-content .blog-bar .blog-bar-author span {
+    font-size: 20px;
+    color: #fff;
+}
+
+
+.blog-list .blog-bar {
+    margin-top: 25px;
+}
+.blog-list .blog-bar .blog-date {
+    display: inline-block;
+    margin-right: 25px;
+}
+.blog-list .blog-bar .blog-date span {
+    color: #fff;
+    font-weight: 600;
+}
+.blog-list .blog-bar .blog-author {
+    display: inline-block;
+    margin-right: 25px;
+}
+.blog-list .blog-bar .blog-author span {
+    color: #fff;
+    font-weight: 600;
+}
+.blog-list .blog-bar .blog-tags {
+    display: inline-block;
+}
+.blog-list .blog-bar .blog-tags span {
+    color: #fff;
+    padding: 6px 12px;
+    background-color: #8a8a8a;
+    border-radius: 20px;
+    margin-right: 4px;
+}
+
+.blog-doc-content .blog-bar .blog-rating {
+    border: 1px solid #ffe500;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    display: block;
+    width: fit-content;
+    box-shadow: 2px 2px 6px #414141;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid #ffe500;
+    border-radius: 8px;
+    color: #ffe500;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 1px 1px 4px #414141;
+    background-color: #6c6b6b;
+    cursor: pointer;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good:hover,
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good:active,
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good:focus {
+    border-color: #46ff00;
+    color: #46ff00;
+    text-decoration: none;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good.active {
+    border-color: #46ff00;
+    color: #46ff00;
+    text-decoration: none;
+    cursor: not-allowed;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:hover,
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:active,
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:focus {
+    border-color: #ff0000;
+    color: #ff0000;
+    text-decoration: none;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad.active {
+    border-color: #ff0000;
+    color: #ff0000;
+    text-decoration: none;
+    cursor: not-allowed;
+}
+
+
+.blog-list {
+    padding: 0;
+    margin: 0;
+}
+.blog-list .blog-list-element {
+    border: 1px solid #b6b6b6;
+    border-radius: 8px;
+    padding: 12px 24px;
+    list-style-type: none;
+    margin-bottom: 25px;
+}
+.blog-list .blog-list-element > a {
+    color: #fff;
+    position: relative;
+    display: block;
+}
+.blog-list .blog-list-element > a:hover,
+.blog-list .blog-list-element > a:focus,
+.blog-list .blog-list-element > a:active {
+    color: #ffe500;
+    text-decoration: none;
+}
+.blog-list .blog-list-element > a span.read-more {
+    position: absolute;
+    right: 0px;
+    width: fit-content;
+}
+
+/*komentarze*/
+.blog-doc-content .blog-doc-comment {
+    background: #8a8a8a;
+    padding: 15px;
+    margin-top: 25px;
+}
+.blog-doc-content .blog-doc-comment .comment-list {
+    margin: 0;
+    padding: 0;
+}
+.blog-doc-content .blog-doc-comment .comment-list > span {
+
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item {
+    border-bottom: 2px dotted #fff;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote {
+    min-width: 180px;
+    max-width: 180px;
+    padding: 0px 10px 20px;
+    text-align: center;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 6px 12px;
+    line-height: 26px;
+    display: inline-block;
+    margin: 5px auto;
+    text-align: center;
+    cursor: pointer;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:hover,
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:active,
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:focus {
+    text-decoration: none;
+    border-color: #46ff00;
+    color: #46ff00;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote.active {
+    text-decoration: none;
+    border-color: #46ff00;
+    color: #46ff00;
+    cursor: not-allowed;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item span.comment-user {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item span.comment-date {
+    float: right;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-content {
+
+}
+.number-of-popular {
+    font-size: 32px;
+    display: block;
+}
+
+
+/* top 10 comment list */
+.comment-list-top-10 {
+    margin: 0;
+    padding: 0;
+}
+.comment-list-top-10 .comment-list-item {
+    list-style-type: none;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+.comment-list-top-10 .comment-list-item .comment-box {
+    margin-left: 6px;
+    border-left: 4px solid #8a8a8a;
+    border-bottom: 4px solid #8a8a8a;
+    padding: 10px;
+}
+.comment-list-top-10 .comment-list-item .top-10-place {
+    display: block;
+    font-size: 32px;
+    color: #cc7a13;
+    font-weight: 600;
+}
+.comment-list-top-10 .comment-list-item span.comment-user {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+}
+.comment-list-top-10 .comment-list-item span.comment-date {
+    display: none;
+}
+.comment-list-top-10 .comment-list-item a.top-10-comment-link-doc {
+    color: #fff;
+    background: #8a8a8a;
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.comment-list-top-10 .comment-list-item a.top-10-comment-link-doc:hover,
+.comment-list-top-10 .comment-list-item a.top-10-comment-link-doc:focus,
+.comment-list-top-10 .comment-list-item a.top-10-comment-link-doc:active {
+    color: #ffe500;
+    text-decoration: none;
+}
+
+/*paginacja*/
+.pagination {
+    justify-content: center;
+}
+.pagination .page-item .page-link {
+    color: #fff;
+    background: #cc7a13;
+    border-color: #fff;
+}
+.pagination .page-item.active .page-link {
+    color: #cc7a13;
+    background-color: #ffe500;
+    border-color: #cc7a13;
+}
+.pagination .page-item.disabled .page-link {
+    color: #8a8a8a;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #cc7a13;
+    border-color: #8a8a8a;
+}
+/*koniec paginacji*/
+
+/*lewe menu*/
+.right-menu {
+    display: flex;
+}
+.right-menu a {
+    color: #000;
+}
+.right-menu a.user-profile {
+    color: #000;
+}
+.right-menu a.login, .right-menu a.logout, .right-menu a.sign-up {
+    color: #8a8a8a;
+    border: 1px solid #8a8a8a;
+    margin-right: 10px;
+    padding: 6px 15px;
+}
+.right-menu .dropdown-toggle {
+    border-color: #8a8a8a;
+    border-radius: 0px;
+}
+.right-menu .dropdown-menu {
+    left: unset;
+    right: 0;
+}
+.admin-block-bar {
+    border: 2px solid #fc0000;
+    padding: 10px;
+    margin-top: 10px;
+}

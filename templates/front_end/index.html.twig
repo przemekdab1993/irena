@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Irena{% endblock %}
+
+{% block body %}
+    <script>
+        window.user = {{ user|raw }}
+    </script>
+
+    <div class="container-main">
+        <div class="row">
+            <div class="col-12 example-wrapper example-wrapper-top">
+                <h1 class="text-center">Tu będzie lista państw</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+    <script src={{ asset('asset/js/loginAjax.js') }}></script>
+{% endblock %}
+
