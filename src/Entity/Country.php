@@ -19,7 +19,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 #[ApiResource(
-    description: 'Ewelina is the best',
     operations: [
         new Get(),
         new GetCollection(),
@@ -41,7 +40,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     , denormalizationContext: [
         'groups' => ['country:write']
     ],
-    paginationItemsPerPage: 10
+    paginationItemsPerPage: 15
 )]
 class Country
 {

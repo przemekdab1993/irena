@@ -53,7 +53,7 @@ final class CountryFactory extends ModelFactory
         $random = self::faker()->numberBetween(0, count(self::COUNTRY_NAME)-1);
 
         return [
-            'setTextName' => self::faker()->country('PL'),
+            'setName' => self::faker()->country( ),
             'flagSymbol' => self::faker()->countryCode(),
             'status' => self::faker()->randomElement(self::STATUS_CODE),
         ];
