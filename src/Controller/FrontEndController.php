@@ -12,6 +12,7 @@ class FrontEndController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
+        
         return $this->render('front_end/index.html.twig', [
             'error' => null,
             'user' => null//$serializer->serialize($this->getUser(), 'jsonld')

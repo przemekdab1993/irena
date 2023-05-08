@@ -2,12 +2,66 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(
+            normalizationContext: [
+                'groups' => ['user:read', 'user:item:get']
+            ]
+        ),
+        new GetCollection(),
+        new Post(),
+        new Put(),
+        new Patch(),
+        new Delete()
+    ],
+    formats: [
+        'json',
+        'jsonld',
+        'html',
+        'csv'
+    ],
+    normalizationContext: [
+        'groups' => ['user:read']
+    ],
+    denormalizationContext: [
+        'groups' => ['user:write']
+    ],
+)]
+#[ApiResource(
+    uriTemplate: '/country/{country_id}/users_visited.{_format}',
+    operations: [new GetCollection()],
+    uriVariables: [
+        'country_id' => new Link(
+            toProperty: 'countriesVisited',
+            fromClass: Country::class,
+        ),
+    ],
+    normalizationContext: [
+        'groups'=> ['user:visited:read']
+    ]
+)]
+#[UniqueEntity(fields: ['email'], message:  'There is already an account with the email')]
+#[UniqueEntity(fields: ['username'], message:  'There is already an account with the username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,6 +70,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups([
+        'user:read',
+        'user:write'
+    ])]
+    #[Assert\NotBlank]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -25,19 +84,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank]
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([
+        'user:read', 'user:visited:read', 'country:read',
+        'user:write'
+    ])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([
+        'user:read', 'user:visited:read', 'country:read',
+        'user:write'
+    ])]
     private ?string $lastName = null;
 
     #[ORM\Column]
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\GreaterThanOrEqual(16)]
+    #[Assert\LessThanOrEqual(99)]
     private ?int $age = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\Email]
     private ?string $email = null;
+
+    #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'usersVisited', cascade: ['persist'])]
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\Valid]
+    private Collection $countriesVisited;
+
+    public function __construct()
+    {
+        $this->countriesVisited = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +238,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Country>
+     */
+    public function getCountriesVisited(): Collection
+    {
+        return $this->countriesVisited;
+    }
+
+    public function addCountriesVisited(Country $countriesVisited): self
+    {
+        if (!$this->countriesVisited->contains($countriesVisited)) {
+            $this->countriesVisited->add($countriesVisited);
+        }
+
+        return $this;
+    }
+
+    public function removeCountriesVisited(Country $countriesVisited): self
+    {
+        $this->countriesVisited->removeElement($countriesVisited);
 
         return $this;
     }
