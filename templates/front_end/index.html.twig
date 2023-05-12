@@ -9,14 +9,20 @@
 
     <div class="container-main">
         <div class="row">
+
             <div class="col-12 example-wrapper example-wrapper-top">
-                <h1 class="text-center">Tu będzie lista państw</h1>
+                <h1 class="text-center">Tu będzie lista państw <i class="fa-solid fa-pepper-hot"></i></h1>
+                <div>
+                    <ul {{ stimulus_controller('api', {method: 'getCountry'}) }}>
+                        <p>ładowanie listy</p>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts_end %}
-    <script src={{ asset('asset/js/loginAjax.js') }}></script>
+{#    <script src={{ asset('asset/js/loginAjax.js') }}></script>#}
 {% endblock %}
 
