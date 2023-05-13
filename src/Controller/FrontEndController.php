@@ -22,36 +22,22 @@ class FrontEndController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'app_login')]
+    #[Route('/login-panel', name: 'app_login_panel')]
     public function login(): Response
     {
-        return $this->render('front_end/login.html.twig', [
+        return $this->render('front_end/loginPanel.html.twig', [
             'error' => null,
             'user' => null//$serializer->serialize($this->getUser(), 'jsonld')
         ]);
     }
+
     #[Route('/sign-up', name: 'app_sign_up')]
     public function singUp(): Response
     {
-        return $this->render('front_end/login.html.twig', [
+        return $this->render('front_end/loginPanel.html.twig', [
             'error' => null,
             'user' => null//$serializer->serialize($this->getUser(), 'jsonld')
         ]);
     }
 
-    #[Route('/country-list', name: 'app_country_list', methods: ['POST'])]
-    public function countryList(Environment $twig, Request $request, LoggerInterface $logger) :Response
-    {
-        $apiData = $request->request->all();
-
-        $data = $request->getContent();
-        $data = json_decode($data);
-        $parents = $data->list;
-
-
-        $htmlContent = $twig->render('renderHTML/countryList.html.twig', ['data' => $parents]);
-
-
-        return new Response($htmlContent);
-    }
 }

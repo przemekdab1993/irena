@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <script>
+        window.user = {{ user|raw }}
+    </script>
+
+    <div class="container-main">
+        <div class="row" >
+            <div class="col-6 offset-3 example-wrapper example-wrapper-center">
+                <div class="box-content">
+                    <h1>Panel logowania</h1>
+                </div>
+
+                <div class="box-content-2">
+                    <div class="container">
+                        <div class="row">
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <h4 class="text-center">Jesteś przecież zalogowany</h4>
+                                <div class="col-6 mb-2 text-center">
+                                    <a href="{{ path('app_index') }}"><button class="btn btn-lg btn-primary" type="submit">Przejdź na stronę główną</button></a>
+                                </div>
+                                <div class="col-6 mb-2 text-center">
+                                    <a href="{{ path('app_logout') }}"><button  class="btn btn-lg btn-primary" type="submit">Wyloguj się</button></a>
+                                </div>
+                            {% else %}
+                                <div class="login-form mt-4 p-4">
+                                    <form method="post" action="#" class="row">
+
+                                        <div id="error-message" class="alert d-none alert-danger"></div>
+                                        <div class="col-12 mb-2">
+                                            <label for="inputUsername">Nazwa użytkownika</label>
+                                            <input type="text" name="username" id="inputUsername" value="" class="form-control" required autofocus>
+                                        </div>
+                                        <div class="col-12 mb-2">
+                                            <label for="inputPassword">Hasło</label>
+                                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <label>
+                                                <input type="checkbox" name="_remember_me" class="form-check-input">
+                                                Zapamiętaj mnie
+                                            </label>
+                                        </div>
+
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                        <div class="col-12 mb-2">
+                                            <button  class="btn btn-lg btn-primary float-end" type="submit">Zaloguj</button>
+                                        </div>
+                                        <div class="col-12 mb-2">
+                                            jeżeli nie masz jeszcze konta: <a href="{{ path('app_sign_up') }}" >zarejestruj się</a>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+    <script src={{ asset('asset/js/loginAjax.js') }}></script>
+{% endblock %}
+

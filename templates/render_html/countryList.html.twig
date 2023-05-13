@@ -1,0 +1,21 @@
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Liczba odwiedzających</th>
+            <th scope="col">Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for country in data %}
+            <tr>
+
+                <td><div style="content:'🇦🇨'"></divstyle>{{ country.name }}</td>
+                <td>{{ country.usersVisited | length }}</td>
+                <td>{{ country.name }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>

@@ -4,17 +4,17 @@ $(function() {
     const $userInfo = $('#user-status-login-true');
 
 
-    if (window.user !== null) {
-        $userInfo.find('span.user-name').text(window.user.userName);
-        $userInfo.removeClass('d-none');
-        $userInfo.next().addClass('d-none');
-    }
+    // if (window.user !== null) {
+    //     $userInfo.find('span.user-name').text(window.user.userName);
+    //     $userInfo.removeClass('d-none');
+    //     $userInfo.next().addClass('d-none');
+    // }
 
     $containerVote.find('form').on('submit', function(event) {
         event.preventDefault();
 
         let dataSet = {
-            email : event.target.email.value,
+            username : event.target.username.value,
             password : event.target.password.value
         }
 
@@ -22,16 +22,20 @@ $(function() {
             url: `/login`,
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+               'Content-Type': 'application/json'
             },
             data: JSON.stringify({
-                email: dataSet.email,
+                username: dataSet.username,
                 password: dataSet.password,
             }),
 
             success: function (data, textStatus, request) {
                 console.log('Submission was successful.');
+                $errorBlock.text('');
+                $errorBlock.addClass('d-none');
 
+
+                console.log(request.getResponseHeader('location'));
                 $.ajax({
                     url: request.getResponseHeader('location'),
                     method: 'GET',
