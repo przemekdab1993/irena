@@ -1,14 +1,9 @@
 $(function() {
     const $containerVote = $('.login-form');
     const $errorBlock = $('#error-message');
-    const $userInfo = $('#user-status-login-true');
+    const $userInfo = $('#success-message');
 
-
-    // if (window.user !== null) {
-    //     $userInfo.find('span.user-name').text(window.user.userName);
-    //     $userInfo.removeClass('d-none');
-    //     $userInfo.next().addClass('d-none');
-    // }
+    console.log(window.user)
 
     $containerVote.find('form').on('submit', function(event) {
         event.preventDefault();
@@ -34,15 +29,16 @@ $(function() {
                 $errorBlock.text('');
                 $errorBlock.addClass('d-none');
 
-
-                console.log(request.getResponseHeader('location'));
                 $.ajax({
                     url: request.getResponseHeader('location'),
                     method: 'GET',
                     success: function (data, textStatus, request) {
-                        $userInfo.find('span.user-name').text(data.userName);
+                        $userInfo.text('Zostałeś poprawnie zalogowany jako '+data.username);
                         $userInfo.removeClass('d-none');
-                        $userInfo.next().addClass('d-none');
+
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 2000);
                     }
                 });
             },

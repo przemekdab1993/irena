@@ -28,12 +28,9 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/logout', name: 'app_logout')]
-    public function logout(): Response
+    public function logout(): void
     {
-        return $this->render('front_end/loginPanel.html.twig', [
-            'error' => null,
-            'user' => null//$serializer->serialize($this->getUser(), 'jsonld')
-        ]);
+        throw new \Exception('Thos should never br reached');
     }
 
     #[Route('/sign-up', name: 'app_sign_up')]

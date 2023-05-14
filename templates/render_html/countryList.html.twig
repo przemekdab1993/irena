@@ -11,9 +11,16 @@
         {%  for country in data %}
             <tr>
 
-                <td><div style="content:'🇦🇨'"></divstyle>{{ country.name }}</td>
+                <td><span class="fi fi-{{ country.flagSymbol | lower }}"></span> {{ country.name }}</td>
                 <td>{{ country.usersVisited | length }}</td>
-                <td>{{ country.name }}</td>
+                <td>
+                    {% if userCurrent not in country.usersVisited %}
+                        <a href="#"><i class="fa-solid fa-jet-fighter"></i> Dodaj do odwiedzonych</a>
+                    {% else %}
+                        <a href="#"><i class="fa-solid fa-toilet"></i> Usuń z odwiedzonych</a>
+                    {% endif %}
+                        <a href="{{ path('app_country_info', {country_id : country.id}) }}"><i class="fa-solid fa-eye"></i> Zobacz szczegóły</a>
+                </td>
             </tr>
         {% endfor %}
 

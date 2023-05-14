@@ -21,25 +21,24 @@ export default class extends Controller {
 
     load() {
         axios.get('http://127.0.0.1:8000/api/countries')
-
             .then( (response) => {
-                console.log(response);
                 const countries = response.data;
-                console.log(typeof countries);
 
+                console.log(countries);
                 axios({
-                        method: 'POST',
-                        url: 'http://127.0.0.1:8000/country-list',
-                        data: {
-                            list: [...countries]
-                        },
-                    })
+                    method: 'POST',
+                    url: 'http://127.0.0.1:8000/country-list',
+
+                    data: {
+                        list: [...countries]
+                    },
+                })
                     .then(response => {
                         this.element.innerHTML = response.data
                     });
-            });
+            })
+        };
 
-    }
 
 
 }

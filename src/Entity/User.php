@@ -90,14 +90,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([
-        'user:read', 'user:visited:read', 'country:read',
+        'user:read', 'user:visited:read',
         'user:write'
     ])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([
-        'user:read', 'user:visited:read', 'country:read',
+        'user:read', 'user:visited:read',
         'user:write'
     ])]
     private ?string $lastName = null;

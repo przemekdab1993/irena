@@ -3,9 +3,6 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    <script>
-        window.user = {{ user|raw }}
-    </script>
 
     <div class="container-main">
         <div class="row" >
@@ -18,7 +15,9 @@
                     <div class="container">
                         <div class="row">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <h4 class="text-center">Jesteś przecież zalogowany</h4>
+                                <div class="user-info">
+                                    <h4 class="text-center">Jesteś  zalogowany jako {{ app.user.username }}</h4>
+                                </div>
                                 <div class="col-6 mb-2 text-center">
                                     <a href="{{ path('app_index') }}"><button class="btn btn-lg btn-primary" type="submit">Przejdź na stronę główną</button></a>
                                 </div>
@@ -30,6 +29,7 @@
                                     <form method="post" action="#" class="row">
 
                                         <div id="error-message" class="alert d-none alert-danger"></div>
+                                        <div id="success-message" class="alert d-none alert-success"></div>
                                         <div class="col-12 mb-2">
                                             <label for="inputUsername">Nazwa użytkownika</label>
                                             <input type="text" name="username" id="inputUsername" value="" class="form-control" required autofocus>

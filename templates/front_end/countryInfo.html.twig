@@ -12,10 +12,10 @@
         <div class="row">
 
             <div class="col-12 example-wrapper example-wrapper-top">
-                <h1 class="text-center">Tu będzie lista państw <i class="fa-solid fa-pepper-hot"></i></h1>
+                <h1 class="text-center">Szczegóły państwa {{ countryData.name }} <span class="fi fi-{{ countryData.flagSymbol | lower }}"></span></h1>
                 <div>
-                    <ul {{ stimulus_controller('api') }}>
-                        <p>ładowanie listy</p>
+                    <ul >
+                        <p>...</p>
                     </ul>
                 </div>
             </div>

@@ -65,7 +65,7 @@ final class CountryFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            // ->afterInstantiate(function(Country $country): void {})
+//            ->afterInstantiate(function(Country $country): void {})
         ;
     }
 

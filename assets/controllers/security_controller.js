@@ -5,9 +5,6 @@ import axios from "axios";
 export default class extends Controller {
     //static values = { method: String }
 
-
-
-
     login(event) {
         event.preventDefault();
         this.element.innerHTML = 'dupa'
@@ -30,6 +27,4 @@ export default class extends Controller {
         });
 
     }
-
-
 }
