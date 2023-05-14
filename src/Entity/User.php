@@ -119,9 +119,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Valid]
     private Collection $countriesVisited;
 
+    #[ORM\OneToMany(mappedBy: 'ownedBy', targetEntity: ApiToken::class)]
+    private Collection $apiTokens;
+
     public function __construct()
     {
         $this->countriesVisited = new ArrayCollection();
+        $this->apiTokens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -264,5 +268,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->countriesVisited->removeElement($countriesVisited);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, ApiToken>
+     */
+    public function getApiTokens(): Collection
+    {
+        return $this->apiTokens;
+    }
+
+    public function addApiToken(ApiToken $apiToken): self
+    {
+        if (!$this->apiTokens->contains($apiToken)) {
+            $this->apiTokens->add($apiToken);
+            $apiToken->setOwnedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApiToken(ApiToken $apiToken): self
+    {
+        if ($this->apiTokens->removeElement($apiToken)) {
+            // set the owning side to null (unless already changed)
+            if ($apiToken->getOwnedBy() === $this) {
+                $apiToken->setOwnedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getValidTokenStrings(): array
+    {
+        return  $this->getApiTokens()
+            ->filter(fn (ApiToken $token) => $token->isValid())
+            ->map(fn (ApiToken $token) => $token->getToken())
+            ->toArray()
+        ;
     }
 }

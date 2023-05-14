@@ -17,6 +17,10 @@
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <div class="user-info">
                                     <h4 class="text-center">Jesteś  zalogowany jako {{ app.user.username }}</h4>
+
+                                    {% for index, token in app.user.validTokenStrings %}
+                                        Token {{ index }}: {{ token }}
+                                    {% endfor %}
                                 </div>
                                 <div class="col-6 mb-2 text-center">
                                     <a href="{{ path('app_index') }}"><button class="btn btn-lg btn-primary" type="submit">Przejdź na stronę główną</button></a>

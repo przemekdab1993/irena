@@ -36,9 +36,9 @@ $(function() {
                         $userInfo.text('Zostałeś poprawnie zalogowany jako '+data.username);
                         $userInfo.removeClass('d-none');
 
-                        setTimeout(() => {
-                            window.location.href = '/';
-                        }, 2000);
+                        // setTimeout(() => {
+                        //     window.location.href = '/';
+                        // }, 2000);
                     }
                 });
             },

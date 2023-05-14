@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ApiToken;
+use App\Factory\ApiTokenFactory;
 use App\Factory\CountryFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,7 +16,7 @@ class AppFixtures extends Fixture
         CountryFactory::createMany(15,['status' => 'ACTIVE']);
         CountryFactory::createMany(5);
 
-        UserFactory::createMany(5, function () {
+        UserFactory::createMany(10, function () {
             $visited = [];
             $count = rand(1, 10);
 
@@ -26,5 +28,19 @@ class AppFixtures extends Fixture
                 'countriesVisited' => $visited
             ];
         });
+
+        ApiTokenFactory::createMany(20, function () {
+            return [
+                'ownedBy' => UserFactory::random(),
+            ];
+        });
+        ApiTokenFactory::createOne([
+            'ownedBy' => UserFactory::random(),
+            'scopes' => [
+                ApiToken::SCOPE_COUNTRY_CREATE,
+                ApiToken::SCOPE_COUNTRY_EDIT,
+                ApiToken::SCOPE_USER_EDIT
+            ],
+        ]);
     }
 }
