@@ -16,7 +16,6 @@ class FrontEndController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(SerializerInterface $serializer, #[CurrentUser] User $user = null): Response
     {
-
         return $this->render('front_end/index.html.twig', [
             'error' => null,
             'userData' => $user ? $serializer->serialize($user, 'jsonld', [
@@ -49,10 +48,11 @@ class FrontEndController extends AbstractController
         if(!$user) {
             return $this->redirectToRoute('app_login_panel');
         }
-        //dd($country_id);
+        $country = $country_id;
+
         return $this->render('front_end/countryInfo.html.twig', [
             'error' => null,
-            'countryData' => $country_id,
+            'countryData' => $country,
             'userData' => $serializer->serialize($user, 'jsonld', [
                 'groups' => ['user:read']
             ])

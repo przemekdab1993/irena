@@ -15,7 +15,6 @@ export default class extends Controller {
     static values = { method: String }
 
     connect() {
-        console.log(this.methodValue);
         this.load();
     }
 
@@ -24,7 +23,6 @@ export default class extends Controller {
             .then( (response) => {
                 const countries = response.data;
 
-                console.log(countries);
                 axios({
                     method: 'POST',
                     url: 'http://127.0.0.1:8000/country-list',
@@ -34,9 +32,10 @@ export default class extends Controller {
                     },
                 })
                     .then(response => {
-                        this.element.innerHTML = response.data
+                        this.element.innerHTML = response.data;
                     });
-            })
+            });
+
         };
 
 
