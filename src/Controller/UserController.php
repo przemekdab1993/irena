@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Country;
-use App\Entity\User;
+use App\Entity\UserApp;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 class UserController extends AbstractController
 {
     #[Route('/set-country-visited/{country}/{action}', name: 'app_user_set_visited')]
-    public function addCountryToVisited(#[CurrentUser] User $user = null, EntityManagerInterface $entityManager, Country $country, $action = null): Response
+    public function addCountryToVisited(#[CurrentUser] UserApp $user = null, EntityManagerInterface $entityManager, Country $country, $action = null): Response
     {
         if (!$user) {
             return new RedirectResponse('app_login_panel');

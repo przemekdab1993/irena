@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Factory\CountryFactory;
-use App\Factory\UserFactory;
+use App\Factory\UserAppFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
         CountryFactory::createMany(15,['status' => 'ACTIVE']);
         CountryFactory::createMany(5);
 
-        UserFactory::createMany(5, function () {
+        UserAppFactory::createMany(5, function () {
             $visited = [];
             $count = rand(1, 10);
 

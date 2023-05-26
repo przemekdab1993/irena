@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use ApiPlatform\Api\IriConverterInterface;
-use App\Entity\User;
+use App\Entity\UserApp;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class RenderHtmlController extends AbstractController
     }
 
     #[Route('/country-list', name: 'app_country_list', methods: ['POST'])]
-    public function countryList(Request $request, LoggerInterface $logger, #[CurrentUser] User $user = null) :Response
+    public function countryList(Request $request, LoggerInterface $logger, #[CurrentUser] UserApp $user = null) :Response
     {
         $apiData = $request->request->all();
 

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Country;
-use App\Entity\User;
+use App\Entity\UserApp;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class FrontEndController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(SerializerInterface $serializer, #[CurrentUser] User $user = null): Response
+    public function index(SerializerInterface $serializer, #[CurrentUser] UserApp $user = null): Response
     {
         return $this->render('front_end/index.html.twig', [
             'error' => null,
@@ -43,7 +43,7 @@ class FrontEndController extends AbstractController
     }
 
     #[Route('/country/{country_id}', name: 'app_country_info')]
-    public function countryInfo(Country $country_id, #[CurrentUser] User $user = null, SerializerInterface $serializer): Response
+    public function countryInfo(Country $country_id, #[CurrentUser] UserApp $user = null, SerializerInterface $serializer): Response
     {
         if(!$user) {
             return $this->redirectToRoute('app_login_panel');

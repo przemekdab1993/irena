@@ -2,8 +2,8 @@
 
 namespace App\Factory;
 
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Entity\UserApp;
+use App\Repository\UserAppRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -12,23 +12,23 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<User>
  *
- * @method        User|Proxy create(array|callable $attributes = [])
- * @method static User|Proxy createOne(array $attributes = [])
- * @method static User|Proxy find(object|array|mixed $criteria)
- * @method static User|Proxy findOrCreate(array $attributes)
- * @method static User|Proxy first(string $sortedField = 'id')
- * @method static User|Proxy last(string $sortedField = 'id')
- * @method static User|Proxy random(array $attributes = [])
- * @method static User|Proxy randomOrCreate(array $attributes = [])
- * @method static UserRepository|RepositoryProxy repository()
- * @method static User[]|Proxy[] all()
- * @method static User[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static User[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static User[]|Proxy[] findBy(array $attributes)
- * @method static User[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static User[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method        UserApp|Proxy create(array|callable $attributes = [])
+ * @method static UserApp|Proxy createOne(array $attributes = [])
+ * @method static UserApp|Proxy find(object|array|mixed $criteria)
+ * @method static UserApp|Proxy findOrCreate(array $attributes)
+ * @method static UserApp|Proxy first(string $sortedField = 'id')
+ * @method static UserApp|Proxy last(string $sortedField = 'id')
+ * @method static UserApp|Proxy random(array $attributes = [])
+ * @method static UserApp|Proxy randomOrCreate(array $attributes = [])
+ * @method static UserAppRepository|RepositoryProxy repository()
+ * @method static UserApp[]|Proxy[] all()
+ * @method static UserApp[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static UserApp[]|Proxy[] createSequence(iterable|callable $sequence)
+ * @method static UserApp[]|Proxy[] findBy(array $attributes)
+ * @method static UserApp[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method static UserApp[]|Proxy[] randomSet(int $number, array $attributes = [])
  */
-final class UserFactory extends ModelFactory
+final class UserAppFactory extends ModelFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -65,7 +65,7 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function(User $user): void {
+            ->afterInstantiate(function(UserApp $user): void {
                 $username = strtolower("{$user->getFirstName()[0]}{$user->getLastName()}");
 
                 $user->setEmail("{$username}@gmail.com");
@@ -80,6 +80,6 @@ final class UserFactory extends ModelFactory
 
     protected static function getClass(): string
     {
-        return User::class;
+        return UserApp::class;
     }
 }
