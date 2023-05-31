@@ -13,8 +13,12 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class UserController extends AbstractController
 {
-    #[Route('/set-country-visited/{country}/{action}', name: 'app_user_set_visited')]
-    public function addCountryToVisited(#[CurrentUser] UserApp $user = null, EntityManagerInterface $entityManager, Country $country, $action = null): Response
+    public function __construct(private EntityManagerInterface $entityManager) {
+
+    }
+
+    #[Route('/set-country-visited/{country}/{action}', name: 'app_user_set_visited', methods: ['GET'])]
+    public function addCountryToVisited(#[CurrentUser] UserApp $user = null, Country $country, $action = null): Response
     {
         if (!$user) {
             return new RedirectResponse('app_login_panel');
@@ -30,8 +34,7 @@ class UserController extends AbstractController
             $message = 'Kraj '.$country->getName().' usunięty z listy odwiedzonych';
         }
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $this->entityManager->flush();
 
         return $this->json(['action' => $action ,'message' => $message]);
     }
