@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Irena{% endblock %}
+
+{% block body %}
+
+    <script>
+        window.user = {{ userData|raw }}
+    </script>
+
+    <div class="container-main">
+        <div class="row">
+
+            <div class="col-12 example-wrapper example-wrapper-top">
+                <h1 class="text-center">Szczegóły państwa {{ countryData.name }} <span class="fi fi-{{ countryData.flagSymbol | lower }}"></span></h1>
+                <div>
+                    <ul >
+                        <p>...</p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+{% endblock %}
+

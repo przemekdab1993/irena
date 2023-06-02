@@ -1,19 +1,93 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <title>{% block title %}Irena{% endblock %}</title>
+
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"  crossorigin="anonymous">
+
+{#    <link rel="stylesheet" href="{{ asset('asset/css/app.css') }}">#}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts_header %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    {% block javascripts_begin %}
+
+    {% endblock %}
+
+    {% block menu %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Irena</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_index') }}">Lista państw</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Lista użytkowników</a>
+                        </li>
+                        {%  if is_granted('ROLE_UADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Panel admina</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+                    {% endif %}
+
+                </div>
+                <div class="right-menu">
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <div class="dropdown">
+                            <button
+                                class="btn dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {{ app.user.username }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Mój Profil</a></li>
+                                <li><a class="dropdown-item" href="#">Ustawienia konta</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Wyloguj</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <a class="nav-link login" href="{{ path('app_login_panel') }}">Zaloguj się</a>
+                        <a class="nav-link sign-up" href="{{ path('app_sign_up') }}">Rejestracja</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block body %}{% endblock %}
+
+    {% block javascripts_end %}{% endblock %}
+</body>
 </html>
