@@ -29,8 +29,6 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class CountryFactory extends ModelFactory
 {
-    private const COUNTRY_NAME = ['Polska', 'Litwa', 'Niemcy', 'Czechy', 'Włochy', 'Francja'];
-
     private const STATUS_CODE = ['UNVERIFIED', 'ACTIVE', 'INACTIVE'];
 
     /**
@@ -50,10 +48,10 @@ final class CountryFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $random = self::faker()->numberBetween(0, count(self::COUNTRY_NAME)-1);
 
         return [
             'setName' => self::faker()->country( ),
+            'description' => self::faker()->paragraph(1),
             'flagSymbol' => self::faker()->countryCode(),
             'status' => self::faker()->randomElement(self::STATUS_CODE),
         ];

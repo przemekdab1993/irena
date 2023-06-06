@@ -42,20 +42,4 @@ class FrontEndController extends AbstractController
         ]);
     }
 
-    #[Route('/country/{country}', name: 'app_country_info')]
-    public function countryInfo(Country $country, #[CurrentUser] UserApp $user = null, SerializerInterface $serializer): Response
-    {
-        if(!$user) {
-            return $this->redirectToRoute('app_login_panel');
-        }
-
-        return $this->render('front_end/countryInfo.html.twig', [
-            'error' => null,
-            'countryData' => $country,
-            'userData' => $serializer->serialize($user, 'jsonld', [
-                'groups' => ['user:read']
-            ])
-        ]);
-    }
-
 }

@@ -16,6 +16,7 @@ use ApiPlatform\Metadata\Put;
 use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -102,11 +103,17 @@ class Country
     #[Assert\Valid]
     private Collection $usersVisited;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'countries')]
+    private Collection $language;
+
 
     public function __construct()
     {
-//        $this->setStatus('UNVERIFIED');
-$this->usersVisited = new ArrayCollection();
+        $this->usersVisited = new ArrayCollection();
+        $this->language = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +184,42 @@ $this->usersVisited = new ArrayCollection();
         if ($this->usersVisited->removeElement($usersVisited)) {
             $usersVisited->removeCountriesVisited($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Language>
+     */
+    public function getLanguage(): Collection
+    {
+        return $this->language;
+    }
+
+    public function addLanguage(Language $language): self
+    {
+        if (!$this->language->contains($language)) {
+            $this->language->add($language);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Language $language): self
+    {
+        $this->language->removeElement($language);
 
         return $this;
     }
