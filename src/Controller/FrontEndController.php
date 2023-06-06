@@ -42,7 +42,7 @@ class FrontEndController extends AbstractController
         ]);
     }
 
-    #[Route('/country/{country_id}', name: 'app_country_info')]
+    #[Route('/country/{country}', name: 'app_country_info')]
     public function countryInfo(Country $country, #[CurrentUser] UserApp $user = null, SerializerInterface $serializer): Response
     {
         if(!$user) {

@@ -16,7 +16,7 @@
             <td>
                     <a href="#" class="{{ userCurrent in country.usersVisited ? 'd-none' : '' }} js-set-visited js-add-visited" data-action="add" data-country-id="{{ country.id }}"><i class="fa-solid fa-jet-fighter"></i> Dodaj do odwiedzonych</a>
                     <a href="#" class="{{ userCurrent not in country.usersVisited ? 'd-none' : '' }} js-set-visited js-remove-visited" data-action="remove" data-country-id="{{ country.id }}"><i class="fa-solid fa-toilet"></i> Usuń z odwiedzonych</a>
-                    <a href="{{ path('app_country_info', {country_id : country.id}) }}"><i class="fa-solid fa-eye"></i> Zobacz szczegóły</a>
+                    <a href="{{ path('app_country_info', {country : country.id}) }}"><i class="fa-solid fa-eye"></i> Zobacz szczegóły</a>
             </td>
         </tr>
     {% endfor %}
