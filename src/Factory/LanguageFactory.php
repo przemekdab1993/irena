@@ -48,7 +48,7 @@ final class LanguageFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'name' => self::faker()->languageCode(),
+            'name' => self::faker()->colorName(),
         ];
     }
 

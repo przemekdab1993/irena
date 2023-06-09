@@ -13,9 +13,24 @@
 
             <div class="col-12 example-wrapper example-wrapper-top">
                 <h1 class="text-center">Szczegóły państwa {{ countryData.name }} <span class="fi fi-{{ countryData.flagSymbol | lower }}"></span></h1>
+                <div class="country-description">
+                    <p>{{ countryData.description }}</p>
+                </div>
+                <div class="country-language">
+                    <p> Języki urzędowe tego kraju to:
+                    {%  for index, language  in countryData.language %}
+                        {% if index != 0 %},
+                        {% endif %}
+                        {{ language.name }}
+                    {% endfor %}.
+                    </p>
+                </div>
                 <div>
+                    <h4>Lista użytkowników którzy odwiedzili ten kraj</h4>
                     <ul >
-                        <p>...</p>
+                        {% for user in countryData.usersVisited %}
+                            <li></a>{{ user.username }} <a href="#"><i class="fa-regular fa-user"></i> Zobacz profil</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
