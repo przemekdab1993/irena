@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Irena{% endblock %}
+
+{% block body %}
+
+    <script>
+        window.user = {{ userData|raw }}
+    </script>
+
+    <div class="container-main">
+        <div class="row">
+
+            <div class="col-12 example-wrapper example-wrapper-top">
+                <h1 class="text-center"><i class="fa-solid fa-list"></i> Lista użytkowników portalu</h1>
+                <div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">username</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Akcje</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {%  for user in usersList %}
+                                <tr>
+
+                                    <td> {{ user.username }}</td>
+                                    <td> {{ user.firstName }}</td>
+                                    <td>
+                                        <a href="{{ path('app_user_profile', {username: user.username}) }}"><i class="fa-regular fa-user"></i> Zobacz profil</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+    {{ parent() }}
+    <script src={{ asset('asset/js/actionListCountry.js') }}></script>
+{% endblock %}
+

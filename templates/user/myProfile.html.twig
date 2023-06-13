@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mój profil{% endblock %}
+
+{% block body %}
+
+    <script>
+        window.user = {{ userData|raw }}
+    </script>
+
+    <div class="container-main">
+        <div class="row">
+
+            <div class="col-12 example-wrapper example-wrapper-top">
+                <h1 class="text-center">Mój profil użytkownika</h1>
+
+                <div data-controller="counter">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+{% endblock %}
+

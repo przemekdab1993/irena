@@ -29,7 +29,7 @@
                     <h4>Lista użytkowników którzy odwiedzili ten kraj</h4>
                     <ul >
                         {% for user in countryData.usersVisited %}
-                            <li></a>{{ user.username }} <a href="#"><i class="fa-regular fa-user"></i> Zobacz profil</a></li>
+                            <li></a>{{ user.username }} <a href="{{ path('app_user_profile', {username: user.username}) }}"><i class="fa-regular fa-user"></i> Zobacz profil</a></li>
                         {% endfor %}
                     </ul>
                 </div>
