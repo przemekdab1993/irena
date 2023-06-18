@@ -1,9 +1,16 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+    static targets = ['count'];
+
     connect() {
         super.connect();
 
-        this.element.innerHTML = 'You have clicked me 0 times :(';
+        this.count = 0;
+
+        this.element.addEventListener('click', () => {
+            this.count++;
+            this.countTarget.innerHTML = this.count;
+        })
     }
 }

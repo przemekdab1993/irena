@@ -9,13 +9,13 @@
     </thead>
     <tbody>
     {%  for country in data %}
-        <tr>
-
-            <td><span class="fi fi-{{ country.flagSymbol | lower }}"></span> {{ country.name }}</td>
-            <td class="js-count-user-visited">{{ country.usersVisited | length }}</td>
+        <tr data-api-target="countryItem">
+            <td><span  class="fi fi-{{ country.flagSymbol | lower }}"></span> {{ country.name }}</td>
+            <td class="js-count-user-visited" data-api-target="countUsers">{{ country.usersVisited | length }}</td>
             <td>
-                    <a href="#" class="{{ userCurrent in country.usersVisited ? 'd-none' : '' }} js-set-visited js-add-visited" data-action="add" data-country-id="{{ country.id }}"><i class="fa-solid fa-jet-fighter"></i> Dodaj do odwiedzonych</a>
-                    <a href="#" class="{{ userCurrent not in country.usersVisited ? 'd-none' : '' }} js-set-visited js-remove-visited" data-action="remove" data-country-id="{{ country.id }}"><i class="fa-solid fa-toilet"></i> Usuń z odwiedzonych</a>
+                    <a href="#" class="{{ userCurrent in country.usersVisited ? 'd-none' : '' }} js-set-visited js-add-visited" data-api-target="addAction" data-action="add" data-country-id="{{ country.id }}"><i class="fa-solid fa-jet-fighter"></i> Dodaj do odwiedzonych</a>
+{#                    <a href="#" class="{{ userCurrent in country.usersVisited ? 'd-none' : '' }} js-set-visited js-add-visited" data-action="add" data-country-id="{{ country.id }}"><i class="fa-solid fa-jet-fighter"></i> Dodaj do odwiedzonych</a>#}
+                    <a href="#" class="{{ userCurrent not in country.usersVisited ? 'd-none' : '' }} js-set-visited js-remove-visited" data-api-target="removeAction" data-action="remove" data-country-id="{{ country.id }}"><i class="fa-solid fa-toilet"></i> Usuń z odwiedzonych</a>
                     <a href="{{ path('app_country_info', {country : country.id}) }}"><i class="fa-solid fa-eye"></i> Zobacz szczegóły</a>
             </td>
         </tr>
