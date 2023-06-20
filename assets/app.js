@@ -9,4 +9,15 @@
 import './styles/app.css';
 
 // start the Stimulus application
+
+import $ from 'jquery';
+import 'bootstrap';
+
 import './bootstrap';
+
+global.$ = $;
+
+import login from './loginAjax';
+
+
+login();

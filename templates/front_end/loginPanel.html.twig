@@ -2,6 +2,11 @@
 
 {% block title %}Login{% endblock %}
 
+{#{% block javascripts_header %}#}
+{#    {{ parent() }}#}
+{#    {{ encore_entry_script_tags('app') }}#}
+{#{% endblock %}#}
+
 {% block body %}
 
     <div class="container-main">
@@ -64,7 +69,7 @@
     </div>
 {% endblock %}
 
-{% block javascripts_end %}
-    <script src={{ asset('asset/js/loginAjax.js') }}></script>
-{% endblock %}
+{#{% block javascripts_end %}#}
+{#    <script src={{ asset('asset/js/loginAjax.js') }}></script>#}
+{#{% endblock %}#}
 
