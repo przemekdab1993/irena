@@ -15,6 +15,10 @@
                 <h1 class="text-center">Mój profil użytkownika</h1>
 
                 <div data-controller="counter">
+                    <button
+                            class="btn btn-primary btn-sm"
+                            data-action="click->counter#increment"
+                    >Click ME!</button>
                     I have been clicked <span data-counter-target="count">0</span> times!
                 </div>
             </div>

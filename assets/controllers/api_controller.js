@@ -12,13 +12,10 @@ import axios from "axios";
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    static values = { method: String }
-
     static targets = ['countryItem', 'countUsers', 'addAction', 'removeAction'];
 
     connect() {
         this.load();
-
     }
 
     load() {
@@ -36,47 +33,32 @@ export default class extends Controller {
                 })
                     .then(response => {
                         this.element.innerHTML = response.data;
-                        this.setEvent();
                     });
             });
     };
 
-    setEvent() {
-        this.countryItemTargets.map((item) => {
-            const buttonAdd = item.getElementsByClassName('js-add-visited')[0];
-            const buttonRemove = item.getElementsByClassName('js-remove-visited')[0];
-            const countUsers = item.getElementsByClassName('js-count-user-visited')[0];
+    setEvent(event) {
+        event.preventDefault();
 
+        const button = event.currentTarget;
+        const currentCountry = button.parentElement.parentElement;
+        const countryId = button.dataset.countryId;
+        const action = button.dataset.act;
+        const countUsers = currentCountry.getElementsByClassName('js-count-user-visited')[0];
+        const secondButton = action === 'add' ? currentCountry.getElementsByClassName('js-remove-visited')[0] : currentCountry.getElementsByClassName('js-add-visited')[0];
 
+        axios.get(`/set-country-visited/${countryId}/${action}`)
+            .then(response => {
+                if (response.data.action === 'add') {
+                    countUsers.innerHTML = +countUsers.textContent + 1;
+                    button.classList.add('d-none');
+                    secondButton.classList.remove('d-none');
 
-            const eventActionClick = (event) => {
-                event.preventDefault();
-
-                const countryId = event.currentTarget.dataset.countryId;
-                const action = event.currentTarget.dataset.action;
-
-                axios.get(`/set-country-visited/${countryId}/${action}`)
-                    .then(response => {
-
-
-                        if (response.data.action === 'add') {
-                            countUsers.innerHTML = +countUsers.textContent + 1;
-                            buttonAdd.classList.add('d-none');
-                            buttonRemove.classList.remove('d-none');
-
-                        } else {
-                            countUsers.innerHTML = +countUsers.textContent - 1;
-                            buttonRemove.classList.add('d-none');
-                            buttonAdd.classList.remove('d-none');
-                        }
-
-                    });
-            }
-
-            buttonAdd.addEventListener('click', eventActionClick);
-            buttonRemove.addEventListener('click', eventActionClick);
-
-        });
+                } else {
+                    countUsers.innerHTML = +countUsers.textContent - 1;
+                    button.classList.add('d-none');
+                    secondButton.classList.remove('d-none');
+                }
+            });
     }
-
 }
