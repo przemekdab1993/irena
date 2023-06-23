@@ -14,12 +14,45 @@
             <div class="col-12 example-wrapper example-wrapper-top">
                 <h1 class="text-center">Mój profil użytkownika</h1>
 
-                <div data-controller="counter">
+                <div data-controller="counter" class="mb-3">
                     <button
-                            class="btn btn-primary btn-sm"
+                            {{ stimulus_controller('color-selector',
+                                { 'default-color-id': 2 }
+                            ) }}
                             data-action="click->counter#increment"
+                            class="btn btn-primary btn-sm"
                     >Click ME!</button>
                     I have been clicked <span data-counter-target="count">0</span> times!
+                </div>
+
+                <div
+                        data-controller="color-selector"
+                        data-color-selector-default-color-id-value="2"
+                >
+                    <select
+                        class="form-select mb-2"
+                        aria-label="Default select example"
+                        data-color-selector-target="select"
+                    >
+                        <option selected>Open this select color</option>
+                        <option value="0">red</option>
+                        <option value="1">blue</option>
+                        <option value="2">yellow</option>
+                    </select>
+
+                    {% for index, color in ['red', 'blue', 'yellow'] %}
+                        <button
+                            class="btn color-square"
+                            type="button"
+                            data-color-selector-target="buttonPick"
+                            data-action="click->color-selector#pickColor"
+                            data-color-id="{{ index }}"
+                            style="background-color: {{ color }};"
+
+                        >
+                            {{ color }}
+                        </button>
+                    {% endfor %}
                 </div>
             </div>
         </div>
