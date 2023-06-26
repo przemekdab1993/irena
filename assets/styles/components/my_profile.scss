@@ -1,0 +1,12 @@
+.color-square {
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+.color-square:hover {
+  border: 2px solid #aaa;
+  color: #aaa;
+}
+.selected-color-square {
+  border:2px solid #000;
+  color: #aaa;
+}

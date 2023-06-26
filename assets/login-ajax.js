@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const loginAjax = () => {
     const $containerVote = $('.login-form');
     const $errorBlock = $('#error-message');
@@ -57,4 +59,4 @@ const loginAjax = () => {
     });
 };
 
-export default loginAjax;
+loginAjax();

@@ -1,0 +1,22 @@
+/*paginacja*/
+.pagination {
+  justify-content: center;
+}
+.pagination .page-item .page-link {
+  color: #fff;
+  background: #cc7a13;
+  border-color: #fff;
+}
+.pagination .page-item.active .page-link {
+  color: #cc7a13;
+  background-color: #ffe500;
+  border-color: #cc7a13;
+}
+.pagination .page-item.disabled .page-link {
+  color: #8a8a8a;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #cc7a13;
+  border-color: #8a8a8a;
+}
+/*koniec paginacji*/
