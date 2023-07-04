@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Repository\AppUserRepository;
 use App\Repository\CountryRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,10 +13,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\MailerInterface;
 
 #[AsCommand(
-    name: 'app:new-country-for-verification:send',
+    name: 'app:newsletter:send',
     description: 'Add a short description for your command',
 )]
-class NewCountryForVerificationSendCommand extends Command
+class NewsletterCommand extends Command
 {
     protected function configure(): void
     {
@@ -23,7 +24,7 @@ class NewCountryForVerificationSendCommand extends Command
             ->setDescription('Send days report country for verification');
     }
 
-    public function __construct(private CountryRepository $countryRepository, private MailerInterface $mailer)
+    public function __construct(private AppUserRepository $appUserRepository ,private CountryRepository $countryRepository, private MailerInterface $mailer)
     {
         parent::__construct(null);
     }
@@ -32,12 +33,14 @@ class NewCountryForVerificationSendCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $unverifiedCountries = $this->countryRepository->findAllByNotVerification();
+        $users = $this->appUserRepository->findAllSubscribeToNewsletter();
 
-        $io->progressStart(count($unverifiedCountries));
+        $io->progressStart(count($users));
 
-        foreach ($unverifiedCountries as $country) {
+        foreach ($users as $user) {
             $io->progressAdvance();
+
+            $countries = $this->countryRepository->findAllNewCountries();
 
 //            $email = (new TemplatedEmail())
 //                ->from('registration@ufo.com')

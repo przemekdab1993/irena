@@ -46,7 +46,7 @@ class CountryRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.status = :status')
-            ->andWhere('c.created_at > :weekAgo')
+            ->andWhere('c.createdAt > :weekAgo')
             ->setParameter('status', 'ACTIVE')
             ->setParameter('weekAgo', new \DateTime('-1 week'))
             ->setMaxResults(15)

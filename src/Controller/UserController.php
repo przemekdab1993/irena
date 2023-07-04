@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Country;
 use App\Entity\AppUser;
-use App\Repository\UserAppRepository;
+use App\Repository\AppUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -42,7 +42,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/users-list', name: 'app_users_list')]
-    public function usersList(SerializerInterface $serializer, #[CurrentUser] AppUser $user = null, UserAppRepository $userAppRepository) : Response
+    public function usersList(SerializerInterface $serializer, #[CurrentUser] AppUser $user = null, AppUserRepository $userAppRepository) : Response
     {
         $usersApp = $userAppRepository->findAll();
 

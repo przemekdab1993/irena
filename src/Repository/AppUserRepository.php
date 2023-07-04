@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method AppUser[]    findAll()
  * @method AppUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserAppRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class AppUserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -54,6 +54,19 @@ class UserAppRepository extends ServiceEntityRepository implements PasswordUpgra
         $user->setPassword($newHashedPassword);
 
         $this->save($user, true);
+    }
+
+    /**
+    //     * @return User[] Returns an array of User objects
+    //     */
+    public function findAllSubscribeToNewsletter(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.subscribeToNewsletter = :subscribe')
+            ->setParameter('subscribe', true)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 //    /**
