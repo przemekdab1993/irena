@@ -52,7 +52,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     uriVariables: [
         'user_id' => new Link(
             toProperty: 'usersVisited',
-            fromClass: UserApp::class,
+            fromClass: AppUser::class,
         ),
     ],
     normalizationContext: [
@@ -98,7 +98,7 @@ class Country
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $status = 'UNVERIFIED';
 
-    #[ORM\ManyToMany(targetEntity: UserApp::class, mappedBy: 'countriesVisited')]
+    #[ORM\ManyToMany(targetEntity: AppUser::class, mappedBy: 'countriesVisited')]
     #[Groups(['country:read', 'country:write'])]
     #[Assert\Valid]
     private Collection $usersVisited;
@@ -162,14 +162,14 @@ class Country
     }
 
     /**
-     * @return Collection<int, UserApp>
+     * @return Collection<int, AppUser>
      */
     public function getUsersVisited(): Collection
     {
         return $this->usersVisited;
     }
 
-    public function addUsersVisited(UserApp $usersVisited): self
+    public function addUsersVisited(AppUser $usersVisited): self
     {
         if (!$this->usersVisited->contains($usersVisited)) {
             $this->usersVisited->add($usersVisited);
@@ -179,7 +179,7 @@ class Country
         return $this;
     }
 
-    public function removeUsersVisited(UserApp $usersVisited): self
+    public function removeUsersVisited(AppUser $usersVisited): self
     {
         if ($this->usersVisited->removeElement($usersVisited)) {
             $usersVisited->removeCountriesVisited($this);

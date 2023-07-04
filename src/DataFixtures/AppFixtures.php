@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Factory\CountryFactory;
 use App\Factory\LanguageFactory;
-use App\Factory\UserAppFactory;
+use App\Factory\AppUserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
             ];
         });
 
-        CountryFactory::createMany(5, function () {
+        CountryFactory::createMany(15, function () {
             $lenguages = [];
             $count = rand(1, 2);
             foreach (range(1,$count) as $v) {
@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
             ];
         });
 
-        UserAppFactory::createMany(5, function () {
+        AppUserFactory::createMany(5, function () {
             $visited = [];
             $count = rand(1, 10);
 

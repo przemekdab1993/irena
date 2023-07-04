@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230602154840 extends AbstractMigration
+final class Version20230704222921 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,15 +20,13 @@ final class Version20230602154840 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE country ALTER created_at SET NOT NULL');
-        $this->addSql('ALTER TABLE country ALTER updated_at SET NOT NULL');
+        $this->addSql('DROP SEQUENCE user_app_id_seq CASCADE');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE country ALTER created_at DROP NOT NULL');
-        $this->addSql('ALTER TABLE country ALTER updated_at DROP NOT NULL');
+        $this->addSql('CREATE SEQUENCE user_app_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
     }
 }

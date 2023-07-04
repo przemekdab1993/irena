@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Country;
-use App\Entity\UserApp;
+use App\Entity\AppUser;
 use App\Repository\UserAppRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +20,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/set-country-visited/{country}/{action}', name: 'app_user_set_visited', methods: ['GET'])]
-    public function addCountryToVisited(#[CurrentUser] UserApp $user = null, Country $country, $action = null): Response
+    public function addCountryToVisited(#[CurrentUser] AppUser $user = null, Country $country, $action = null): Response
     {
         if (!$user) {
             return new RedirectResponse('app_login_panel');
@@ -42,7 +42,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/users-list', name: 'app_users_list')]
-    public function usersList(SerializerInterface $serializer, #[CurrentUser] UserApp $user = null, UserAppRepository $userAppRepository) : Response
+    public function usersList(SerializerInterface $serializer, #[CurrentUser] AppUser $user = null, UserAppRepository $userAppRepository) : Response
     {
         $usersApp = $userAppRepository->findAll();
 
@@ -56,7 +56,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user-profile/{username}', name: 'app_user_profile')]
-    public function userProfile(SerializerInterface $serializer, #[CurrentUser] UserApp $user = null, UserApp $userApp) : Response
+    public function userProfile(SerializerInterface $serializer, #[CurrentUser] AppUser $user = null, AppUser $userApp) : Response
     {
         if ($user === $userApp) {
             return $this->redirectToRoute('app_my_profile');
@@ -72,7 +72,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/my-profile', name: 'app_my_profile')]
-    public function myProfile(SerializerInterface $serializer, #[CurrentUser] UserApp $user = null) : Response
+    public function myProfile(SerializerInterface $serializer, #[CurrentUser] AppUser $user = null) : Response
     {
 
         return $this->render('user/myProfile.html.twig', [

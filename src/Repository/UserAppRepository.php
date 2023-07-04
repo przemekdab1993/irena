@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\UserApp;
+use App\Entity\AppUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -12,19 +12,19 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 /**
  * @extends ServiceEntityRepository<User>
  *
- * @method UserApp|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserApp|null findOneBy(array $criteria, array $orderBy = null)
- * @method UserApp[]    findAll()
- * @method UserApp[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method AppUser|null find($id, $lockMode = null, $lockVersion = null)
+ * @method AppUser|null findOneBy(array $criteria, array $orderBy = null)
+ * @method AppUser[]    findAll()
+ * @method AppUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserAppRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserApp::class);
+        parent::__construct($registry, AppUser::class);
     }
 
-    public function save(UserApp $entity, bool $flush = false): void
+    public function save(AppUser $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -33,7 +33,7 @@ class UserAppRepository extends ServiceEntityRepository implements PasswordUpgra
         }
     }
 
-    public function remove(UserApp $entity, bool $flush = false): void
+    public function remove(AppUser $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -47,7 +47,7 @@ class UserAppRepository extends ServiceEntityRepository implements PasswordUpgra
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-        if (!$user instanceof UserApp) {
+        if (!$user instanceof AppUser) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 

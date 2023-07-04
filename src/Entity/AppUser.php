@@ -62,7 +62,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 #[UniqueEntity(fields: ['email'], message:  'There is already an account with the email')]
 #[UniqueEntity(fields: ['username'], message:  'There is already an account with the username')]
-class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
+class AppUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -118,6 +118,9 @@ class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:read', 'user:write'])]
     #[Assert\Valid]
     private Collection $countriesVisited;
+
+    #[ORM\Column]
+    private ?bool $subscribeToNewsletter = null;
 
     public function __construct()
     {
@@ -262,6 +265,18 @@ class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCountriesVisited(Country $countriesVisited): self
     {
         $this->countriesVisited->removeElement($countriesVisited);
+
+        return $this;
+    }
+
+    public function isSubscribeToNewsletter(): ?bool
+    {
+        return $this->subscribeToNewsletter;
+    }
+
+    public function setSubscribeToNewsletter(bool $subscribeToNewsletter): self
+    {
+        $this->subscribeToNewsletter = $subscribeToNewsletter;
 
         return $this;
     }

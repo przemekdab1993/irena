@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Country;
-use App\Entity\UserApp;
+use App\Entity\AppUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class CountryController extends AbstractController
 {
     #[Route('/country/{country}', name: 'app_country_info')]
-    public function countryInfo(Country $country, #[CurrentUser] UserApp $user = null, SerializerInterface $serializer): Response
+    public function countryInfo(Country $country, #[CurrentUser] AppUser $user = null, SerializerInterface $serializer): Response
     {
         if(!$user) {
             return $this->redirectToRoute('app_login_panel');

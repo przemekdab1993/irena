@@ -39,6 +39,22 @@ class CountryRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    //     * @return Country[] Returns an array of Country objects
+    //     */
+    public function findAllNewCountries(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.status = :status')
+            ->andWhere('c.created_at > :weekAgo')
+            ->setParameter('status', 'ACTIVE')
+            ->setParameter('weekAgo', new \DateTime('-1 week'))
+            ->setMaxResults(15)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Country[] Returns an array of Country objects
 //     */
