@@ -1,0 +1,17 @@
+{% extends 'email/base_email.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="content">
+            <h1 class="text-center">Nice to meet you {{ user.username }}!</h1>
+            <p class="block">
+                Welcome to <strong>{{ title }}</strong>, we can't wait to read what you have to write.
+            </p>
+            <p class="block">
+                This is your activation link. Please click on it to activate your account.
+                <br />
+                <a href="{{ url('app_registration_confirm', {username: user.username ,hash: user.hashConfirm }) }}">Click my !!!</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

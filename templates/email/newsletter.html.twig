@@ -1,0 +1,29 @@
+{% extends 'email/base_email.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="content">
+            <h2 class="text-center">List of new added countries to the portal.</h2>
+            <p>Check if you have already visited any of them.</p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for country in newCountries %}
+                    <tr data-api-target="countryItem">
+                        <td><span  class="fi fi-{{ country.flagSymbol | lower }}"></span> {{ country.name }}</td>
+                        <td>
+                            <a href="{{ url('app_country_info', {country : country.id}) }}"><i class="fa-solid fa-eye"></i> Zobacz szczegóły</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{%  endblock %}

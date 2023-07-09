@@ -18,6 +18,8 @@ use Symfony\Component\Mailer\MailerInterface;
 )]
 class NewsletterCommand extends Command
 {
+    private string $newsletterEmail = 'newsletter@gmail.com';
+
     protected function configure(): void
     {
         $this
@@ -40,16 +42,20 @@ class NewsletterCommand extends Command
         foreach ($users as $user) {
             $io->progressAdvance();
 
-            $countries = $this->countryRepository->findAllNewCountries();
+            $newCountries = $this->countryRepository->findAllNewCountries();
 
-//            $email = (new TemplatedEmail())
-//                ->from('registration@ufo.com')
-//                ->to($this->adminEmail)
-//                ->subject('Registration confirm!!!')
-//                ->htmlTemplate('email/admin_info.html.twig');
-//
-//
-//            $this->mailer->send($email);
+            $email = (new TemplatedEmail())
+                ->from($this->newsletterEmail)
+                ->to($user->getEmail())
+                ->subject('Newsletter country!!!')
+                ->htmlTemplate('email/newsletter.html.twig')
+                ->context([
+                    'user' => $user,
+                    'newCountries' => $newCountries
+                ]);
+
+
+            $this->mailer->send($email);
         }
 
         $io->progressFinish();
