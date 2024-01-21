@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Country;
 use App\Entity\UserApp;
+use App\Entity\UserAppVisitedCountry;
+use App\Repository\UserAppVisitedCountryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,10 +28,19 @@ class UserController extends AbstractController
         $message = 'Nieprawidłowa operacja';
 
         if ($action === 'add') {
-            $user->addCountriesVisited($country);
+            $visited = new UserAppVisitedCountry();
+            $visited->setCountry($country);
+            $user->addUserAppVisitedCountry($visited);
             $message = 'Kraj '.$country->getName().' dodany do listy odwiedzonych';
         }
         elseif ($action === 'remove') {
+
+            /**
+             * @var UserAppVisitedCountryRepository $userAppVisitedCountry
+             */
+            $userAppVisitedCountry = $this->entityManager->getRepository(UserAppVisitedCountry::class);
+
+
             $user->removeCountriesVisited($country);
             $message = 'Kraj '.$country->getName().' usunięty z listy odwiedzonych';
         }

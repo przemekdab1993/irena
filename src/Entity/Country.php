@@ -97,16 +97,15 @@ class Country
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $status = 'UNVERIFIED';
 
-    #[ORM\ManyToMany(targetEntity: UserApp::class, mappedBy: 'countriesVisited')]
+    #[ORM\OneToMany(mappedBy: 'country', targetEntity: UserAppVisitedCountry::class)]
     #[Groups(['country:read', 'country:write'])]
     #[Assert\Valid]
-    private Collection $usersVisited;
-
+    private Collection $userAppVisitedCountries;
 
     public function __construct()
     {
 //        $this->setStatus('UNVERIFIED');
-$this->usersVisited = new ArrayCollection();
+        $this->userAppVisitedCountries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,30 +153,33 @@ $this->usersVisited = new ArrayCollection();
         return $this;
     }
 
-    /**
-     * @return Collection<int, UserApp>
-     */
-    public function getUsersVisited(): Collection
-    {
-        return $this->usersVisited;
+/**
+ * @return Collection<int, UserAppVisitedCountry>
+ */
+public function getUserAppVisitedCountries(): Collection
+{
+    return $this->userAppVisitedCountries;
+}
+
+public function addUserAppVisitedCountry(UserAppVisitedCountry $userAppVisitedCountry): static
+{
+    if (!$this->userAppVisitedCountries->contains($userAppVisitedCountry)) {
+        $this->userAppVisitedCountries->add($userAppVisitedCountry);
+        $userAppVisitedCountry->setCountry($this);
     }
 
-    public function addUsersVisited(UserApp $usersVisited): self
-    {
-        if (!$this->usersVisited->contains($usersVisited)) {
-            $this->usersVisited->add($usersVisited);
-            $usersVisited->addCountriesVisited($this);
+    return $this;
+}
+
+public function removeUserAppVisitedCountry(UserAppVisitedCountry $userAppVisitedCountry): static
+{
+    if ($this->userAppVisitedCountries->removeElement($userAppVisitedCountry)) {
+        // set the owning side to null (unless already changed)
+        if ($userAppVisitedCountry->getCountry() === $this) {
+            $userAppVisitedCountry->setCountry(null);
         }
-
-        return $this;
     }
 
-    public function removeUsersVisited(UserApp $usersVisited): self
-    {
-        if ($this->usersVisited->removeElement($usersVisited)) {
-            $usersVisited->removeCountriesVisited($this);
-        }
-
-        return $this;
-    }
+    return $this;
+}
 }

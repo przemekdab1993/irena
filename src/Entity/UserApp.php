@@ -114,14 +114,14 @@ class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email]
     private ?string $email = null;
 
-    #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'usersVisited', cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'userApp', targetEntity: UserAppVisitedCountry::class, cascade: ["persist"])]
     #[Groups(['user:read', 'user:write'])]
     #[Assert\Valid]
-    private Collection $countriesVisited;
+    private Collection $userAppVisitedCountries;
 
     public function __construct()
     {
-        $this->countriesVisited = new ArrayCollection();
+        $this->userAppVisitedCountries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,25 +243,31 @@ class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Country>
+     * @return Collection<int, UserAppVisitedCountry>
      */
-    public function getCountriesVisited(): Collection
+    public function getUserAppVisitedCountries(): Collection
     {
-        return $this->countriesVisited;
+        return $this->userAppVisitedCountries;
     }
 
-    public function addCountriesVisited(Country $countriesVisited): self
+    public function addUserAppVisitedCountry(UserAppVisitedCountry $userAppVisitedCountry): static
     {
-        if (!$this->countriesVisited->contains($countriesVisited)) {
-            $this->countriesVisited->add($countriesVisited);
+        if (!$this->userAppVisitedCountries->contains($userAppVisitedCountry)) {
+            $this->userAppVisitedCountries->add($userAppVisitedCountry);
+            $userAppVisitedCountry->setUserApp($this);
         }
 
         return $this;
     }
 
-    public function removeCountriesVisited(Country $countriesVisited): self
+    public function removeUserAppVisitedCountry(UserAppVisitedCountry $userAppVisitedCountry): static
     {
-        $this->countriesVisited->removeElement($countriesVisited);
+        if ($this->userAppVisitedCountries->removeElement($userAppVisitedCountry)) {
+            // set the owning side to null (unless already changed)
+            if ($userAppVisitedCountry->getUserApp() === $this) {
+                $userAppVisitedCountry->setUserApp(null);
+            }
+        }
 
         return $this;
     }
