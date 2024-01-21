@@ -19,13 +19,13 @@ export default class extends Controller {
     }
 
     load() {
-        axios.get('http://127.0.0.1:8000/api/countries?order%5Bname%5D=asc')
+        axios.get('/api/countries?order%5Bname%5D=asc')
             .then( (response) => {
                 const countries = response.data;
 
                 axios({
                     method: 'POST',
-                    url: 'http://127.0.0.1:8000/country-list',
+                    url: '/country-list',
 
                     data: {
                         list: [...countries]
