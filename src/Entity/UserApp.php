@@ -114,7 +114,7 @@ class UserApp implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'userApp', targetEntity: UserAppVisitedCountry::class, cascade: ["persist"])]
+    #[ORM\OneToMany(mappedBy: 'userApp', targetEntity: UserAppVisitedCountry::class, cascade: ["persist"], orphanRemoval: true)]
     #[Groups(['user:read', 'user:write'])]
     #[Assert\Valid]
     private Collection $userAppVisitedCountries;

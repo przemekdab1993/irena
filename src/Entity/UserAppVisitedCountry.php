@@ -17,6 +17,7 @@ class UserAppVisitedCountry
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['country:read', 'country:write'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'userAppVisitedCountries')]
@@ -24,7 +25,6 @@ class UserAppVisitedCountry
     private ?UserApp $userApp = null;
 
     #[ORM\ManyToOne(inversedBy: 'userAppVisitedCountries')]
-    //#[Groups(['country:read', 'country:write'])]
     private ?Country $country = null;
 
     public function getId(): ?int

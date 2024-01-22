@@ -38,11 +38,15 @@ class UserController extends AbstractController
             /**
              * @var UserAppVisitedCountryRepository $userAppVisitedCountry
              */
-            $userAppVisitedCountry = $this->entityManager->getRepository(UserAppVisitedCountry::class);
+            $userAppVisitedCountryRepository = $this->entityManager->getRepository(UserAppVisitedCountry::class);
+            $userAppVisitedCountry = $userAppVisitedCountryRepository->findOneBy(['userApp' => $user, 'country' => $country]);
 
+            if ($userAppVisitedCountry) {
+                $user->removeUserAppVisitedCountry($userAppVisitedCountry);
 
-            $user->removeCountriesVisited($country);
-            $message = 'Kraj '.$country->getName().' usunięty z listy odwiedzonych';
+                $message = 'Kraj '.$country->getName().' usunięty z listy odwiedzonych';
+            }
+
         }
 
         $this->entityManager->flush();
